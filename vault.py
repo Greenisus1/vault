@@ -70,5 +70,8 @@ def launch(test_hook=None):
 
 def main():
  import argparse
- p=argparse.ArgumentParser(description=__doc__);p.add_argument('--version',action='version',version=VERSION);p.parse_args();launch()
-if __name__=='__main__':main()
+ p=argparse.ArgumentParser(description=__doc__);p.add_argument('--version',action='version',version=VERSION);p.add_argument('--gui',action='store_true');args=p.parse_args()
+ if args.gui:launch();return 0
+ from vault_terminal import launch as terminal_launch
+ return terminal_launch()
+if __name__=='__main__':raise SystemExit(main())
