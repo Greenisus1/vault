@@ -13,7 +13,7 @@ from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey,
 from cryptography.hazmat.primitives import serialization
 from cryptography.exceptions import InvalidSignature
 
-VERSION='1.0.0'
+VERSION='1.1.0'
 MAX_FILE=1024*1024
 KDF_N=2**15
 IDLE_SECONDS=120
