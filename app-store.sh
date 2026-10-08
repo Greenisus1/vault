@@ -25,7 +25,6 @@ check_display() {
 }
 case "${1:-}" in
  install)
-  ensure_tk
   if ! python3 -c 'from cryptography.fernet import Fernet; from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey' >/dev/null 2>&1; then
    if command -v apt-get >/dev/null 2>&1 && [ "$(id -u)" = 0 ]; then
     echo 'Cryptography is missing. Installing python3-cryptography with apt-get.'
@@ -36,6 +35,7 @@ case "${1:-}" in
   fi
   python3 -c 'from cryptography.fernet import Fernet; from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey' >/dev/null 2>&1 || { echo 'This Python cannot load the required cryptography library.'; exit 1; }
   ;;
- run) check_display; exec python3 vault.py ;;
- *) echo 'Usage: bash app-store.sh install|run'; exit 2 ;;
+ run) exec python3 vault.py ;;
+ gui) ensure_tk; check_display; exec python3 vault.py --gui ;;
+ *) echo 'Usage: bash app-store.sh install|run|gui'; exit 2 ;;
 esac
